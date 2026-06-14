@@ -47,7 +47,6 @@ model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 # Heading
-st.image("farmer.jpg", width=500)
 st.title("🌾 Crop Recommendation System")
 st.write("Enter soil and weather values")
 
