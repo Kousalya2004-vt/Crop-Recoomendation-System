@@ -8,14 +8,17 @@ st.set_page_config(
     page_icon="🌾",
     layout="wide"
 )
-
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(to right, #90EE90, #87CEEB);
+    background-image: url("https://images.unsplash.com/photo-1464226184884-fa280b87c399");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 </style>
 """, unsafe_allow_html=True)
+
 # Load dataset
 df = pd.read_excel("Crop_recommendation.csv.xlsx")
 
