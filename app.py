@@ -46,9 +46,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
-# Heading
-st.title("🌾 Crop Recommendation System")
-st.write("Enter soil and weather values")
+
+st.title(" 🌾 AI Crop Recommendation System")
+st.write("Predict the best crop based on soil nutrients and weather conditions.")
 
 # Inputs
 N = st.number_input("Nitrogen (N)", min_value=0, step=10)
