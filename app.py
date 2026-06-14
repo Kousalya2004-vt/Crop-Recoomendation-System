@@ -88,4 +88,5 @@ if st.button("Predict Crop"):
     )
 
     prediction = model.predict(data)
+    st.success(f"The recommended crop is: {prediction[0]}")
 
