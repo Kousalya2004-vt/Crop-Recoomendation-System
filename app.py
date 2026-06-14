@@ -8,13 +8,25 @@ st.set_page_config(
     page_icon="🌾",
     layout="wide"
 )
+
 st.markdown("""
 <style>
 .stApp {
-    background-image: url("https://images.unsplash.com/photo-1464226184884-fa280b87c399");
+    background-image: url("farmer.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+h1 {
+    color: white !important;
+    text-align: center;
+}
+
+[data-testid="stVerticalBlock"]{
+    background-color: rgba(255,255,255,0.75);
+    padding: 20px;
+    border-radius: 15px;
 }
 </style>
 """, unsafe_allow_html=True)
