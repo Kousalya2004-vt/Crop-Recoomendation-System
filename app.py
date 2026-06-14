@@ -3,6 +3,19 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
+st.set_page_config(
+    page_title="Crop Recommendation",
+    page_icon="🌾",
+    layout="wide"
+)
+
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(to right, #90EE90, #87CEEB);
+}
+</style>
+""", unsafe_allow_html=True)
 # Load dataset
 df = pd.read_excel("Crop_recommendation.csv.xlsx")
 
@@ -19,6 +32,7 @@ model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 # Heading
+st.image("farmer.jpg", width=500)
 st.title("🌾 Crop Recommendation System")
 st.write("Enter soil and weather values")
 
@@ -61,29 +75,3 @@ if st.button("Predict Crop"):
 
     prediction = model.predict(data)
 
-   st.set_page_config(page_title="Crop Recommendation", page_icon="🌾")
-
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(to right, #90EE90, #87CEEB);
-}
-h1 {
-    text-align: center;
-    color: darkgreen;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.image("farmer.jpg", width=350)
-
-st.markdown(
-    "<h1>🌾 Crop Recommendation System 🌾</h1>",
-    unsafe_allow_html=True
-)
-
-st.success(
-    "✅ Recommended Crop: " + prediction[0]
-)
-
-st.balloons()
