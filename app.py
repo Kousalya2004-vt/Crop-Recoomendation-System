@@ -61,6 +61,29 @@ if st.button("Predict Crop"):
 
     prediction = model.predict(data)
 
-    st.success(
-        "Recommended Crop: " + prediction[0]
-    )
+   st.set_page_config(page_title="Crop Recommendation", page_icon="🌾")
+
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(to right, #90EE90, #87CEEB);
+}
+h1 {
+    text-align: center;
+    color: darkgreen;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.image("farmer.jpg", width=350)
+
+st.markdown(
+    "<h1>🌾 Crop Recommendation System 🌾</h1>",
+    unsafe_allow_html=True
+)
+
+st.success(
+    "✅ Recommended Crop: " + prediction[0]
+)
+
+st.balloons()
