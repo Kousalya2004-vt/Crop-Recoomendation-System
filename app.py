@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
@@ -8,28 +9,34 @@ st.set_page_config(
     page_icon="🌾",
     layout="wide"
 )
-
 st.markdown("""
 <style>
+
 .stApp {
-    background-image: url("farmer.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(to right, #e8f5e9, #c8e6c9);
 }
 
 h1 {
-    color: white !important;
+    color: #1b5e20;
     text-align: center;
 }
 
-[data-testid="stVerticalBlock"]{
-    background-color: rgba(255,255,255,0.75);
+[data-testid="stVerticalBlock"] {
+    background-color: rgba(255,255,255,0.85);
     padding: 20px;
     border-radius: 15px;
 }
+
+.stButton>button {
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
 </style>
 """, unsafe_allow_html=True)
+
 
 # Load dataset
 df = pd.read_excel("Crop_recommendation.csv.xlsx")
@@ -47,22 +54,36 @@ model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 
-st.title(" 🌾 AI Crop Recommendation System")
-st.write("Predict the best crop based on soil nutrients and weather conditions.")
+st.title("🌾 AI Crop Recommendation System")
+st.markdown("### Smart Agriculture using Machine Learning and Real-Time Weather Data")
+st.write("Enter soil and weather values")
+
+city = st.text_input("Enter City Name")
+
+temperature = None
+humidity = None
+
+if st.button("Fetch Weather"):
+
+    API_KEY = "80a1816fc6a52aed12448e0c2f5e1887"
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        weather = response.json()
+
+        temperature = weather["main"]["temp"]
+        humidity = weather["main"]["humidity"]
+
+        st.success(f"Temperature: {temperature} °C")
+        st.success(f"Humidity: {humidity} %")
 
 # Inputs
 N = st.number_input("Nitrogen (N)", min_value=0, step=10)
 P = st.number_input("Phosphorus (P)", min_value=0, step=10)
 K = st.number_input("Potassium (K)", min_value=0, step=10)
-
-temperature = st.number_input(
-    "Temperature", min_value=0.0, step=1.0
-)
-
-humidity = st.number_input(
-    "Humidity", min_value=0.0, step=1.0
-)
-
 ph = st.number_input(
     "pH", min_value=0.0, step=0.1
 )
@@ -88,5 +109,5 @@ if st.button("Predict Crop"):
     )
 
     prediction = model.predict(data)
-    st.success(f"The recommended crop is: {prediction[0]}")
+    st.success(f"Recommended Crop: {prediction[0].upper()}")
 
