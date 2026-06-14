@@ -1,0 +1,5 @@
+app.py
+crop.py
+crop_gui.py
+Crop_recommendation.csv.xlsx
+requirements.txt
